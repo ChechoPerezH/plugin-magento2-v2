@@ -56,7 +56,10 @@
         {
             $parent = $this->getParentBlock();
             $this->_order = $parent->getOrder();
-            $this->_source = $parent->getSource();
+	    if ($this->_order->getPayment()->getMethod() !== \Decidir\SpsDecidir\Model\Payment::CODE) {
+                return $this;
+            }
+	    $this->_source = $parent->getSource();
 
             $store = $this->getStore();
             $costo = 0;
